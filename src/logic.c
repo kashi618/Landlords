@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "gamelogic.h"
+#include "logic.h"
 
 // GameLogic.h
     // TODO: Core logic (Start)

@@ -1,27 +1,30 @@
-# Quick Shortcuts
+# Quick shortcuts
 CC = gcc
-CFLAGS = -Wall -Wextra
+CFLAGS = -Wall -Wextra -Isrc
 TARGET = landlords
+SRC_DIR = src
 
-SRCS = $(wildcard *.c)
+SRCS = $(wildcard $(SRC_DIR)/*.c)
 OBJS = $(SRCS:.c=.o)
 
-# Compiling only changed files
+# Default target
+all: $(TARGET)
+
+# Linking target binary
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
 
-%.o: %.c %.h
+# Compiling source files into object files
+$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Commands
-## Run compiled file
+# Run compiled file
 run: $(TARGET)
 	./$(TARGET)
 
-## Remove compiled files
-clean: 
-	rm -f $(OBJS) $(TARGET)
+# Remove compiled files
+clean:
+	rm -f $(SRC_DIR)/*.o $(TARGET)
 
 # Phony declarations
-.PHONY: run clean
-
+.PHONY: all run clean
